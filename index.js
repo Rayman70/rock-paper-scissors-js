@@ -14,7 +14,6 @@ function computerPlay() {
         return choice;
     }
 }
-//console.log(computerPlay);
 
 //player prompt
 function playerPlay() {
@@ -28,7 +27,6 @@ function playerPlay() {
         return playerChoice;
     }
 }
-//console.log(playerPlay);
 
 function playRound(playerSelection, computerSelection) {
     if(playerSelection === "rock") {
