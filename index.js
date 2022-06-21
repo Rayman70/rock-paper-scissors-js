@@ -3,11 +3,11 @@ const paperBtn = document.getElementById("paper");
 const scissorBtn = document.getElementById("scissor");
 const startBtn = document.getElementById("startGame");
 const resetBtn = document.getElementById("resetGame");
-const drawCount = document.getElementById("draws");
-let playerScore = parseInt(document.getElementById("playerScore").textContent);
-let computerScore = parseInt(document.getElementById("computerScore").textContent);
-let round = 0;
-let tie = 0;
+let roundNum = 0;
+let playerScoreNum = 0;
+let computerScoreNum = 0;
+let drawCountNum = 0;
+
 
 
 // Function for computer to play
@@ -17,85 +17,118 @@ function computerPlay() {
     return computerChoice;
 }
 
-// Player choice
-function playerPlay() {
-    rockBtn.addEventListener("click", () => {
-        computerPlay();
-        playRound("rock");
-    });
-    paperBtn.addEventListener("click", () => {
-        computerPlay();
-        playRound("paper");
-    });
-    scissorBtn.addEventListener("click", () => {
-        computerPlay();
-        playRound("scissor");
-    });
+rockBtn.addEventListener("click", () => {
+    playRound("rock");
+});
+
+paperBtn.addEventListener("click", () => {
+    playRound("paper");
+});
+
+scissorBtn.addEventListener("click", () => {
+    playRound("scissor");
+});
     
-}
 
 function playRound(playerSelection) {
     const computerSelection = computerPlay();
     if(playerSelection === "rock") {
         if(computerSelection ==="rock") {
+            drawCountNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
             console.log("It's a Rock Draw!")
-            
         } else if(computerSelection === "paper") {
-            computerScore ++;
-            document.getElementById("computerScore").textContent = computerScore;
-            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScore);
+            computerScoreNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
+            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScoreNum);
         } else if(computerSelection === "scissor") {
-            playerScore ++;
-            document.getElementById("playerScore").textContent = playerScore;
-            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScore);
+            playerScoreNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
+            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScoreNum);
         }
     } else if (playerSelection === "paper"){
         if(computerSelection === "rock") {
-            playerScore ++;
-            document.getElementById("playerScore").textContent = playerScore;
-            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScore);
+            playerScoreNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
+            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScoreNum);
         } else if(computerSelection === "paper") {
+            drawCountNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
             console.log("Its a Paper Draw!");
         } else if(computerSelection === "scissor") {
-            computerScore ++;
-            document.getElementById("computerScore").textContent = computerScore;
-            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScore);
+            computerScoreNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
+            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScoreNum);
         }
     } else if (playerSelection === "scissor") {
         if(computerSelection === "rock") {
-            computerScore ++;
-            document.getElementById("computerScore").textContent = computerScore;
-            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScore);
+            computerScoreNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
+            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScoreNum);
         } else if(computerSelection === "paper") {
-            playerScore ++;
-            document.getElementById("playerScore").textContent = playerScore;
-            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScore);
+            playerScoreNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
+            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScoreNum);
         } else if(computerSelection === "scissor") {
+            drawCountNum ++;
+            roundNum ++;
+            updateScore();
+            checkWinner();
             console.log("It's a Scissor Draw!");
         }
     }
 }
 
-function game() {
-    if (round >= 5) {
-        alert("Maximum rounds played.");
-    } else {
-        alert(`Round ${round}`);
-        playerPlay();
-        console.log("Score player: " + playerScore);
-        console.log("Score computer: " + computerScore);
-        
-        round ++;
-    }
-    resetBtn.addEventListener("click", () => {
-        round = 0;
-        document.getElementById("playerScore").textContent = 0;
-        document.getElementById("computerScore").textContent = 0;
-    });
-
+function updateScore() {
+    document.getElementById("round").textContent = roundNum;
+    document.getElementById("playerScore").textContent = playerScoreNum;
+    document.getElementById("computerScore").textContent = computerScoreNum;
+    document.getElementById("draws").textContent = drawCountNum;
 }
 
+function checkWinner() {
+    if (playerScoreNum === 5 || computerScoreNum === 5) {
+        const winner = playerScoreNum === 5 ? "You win the game!" : "Computer wins!";
+        alert(winner);
+        roundNum = drawCountNum = 0;
+        playerScoreNum = computerScoreNum = 0;
+        updateScore();
+        // maybe add an alert to click reset and then "disable" the choices besides reset
+    }
+}
+
+function game() {
+    computerPlay();
+    playRound();
+    updateScore();
+    checkWinner();
+}
+    
 startBtn.addEventListener("click", () => {
     game();
-});
+}, {once: true});
 
+resetBtn.addEventListener("click", () => {
+    roundNum = 0;
+    playerScoreNum = 0;
+    computerScoreNum = 0;
+    drawCountNum = 0;
+    updateScore();
+    console.log("erased");
+});
