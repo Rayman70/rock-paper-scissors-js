@@ -17,17 +17,20 @@ function computerPlay() {
     return computerChoice;
 }
 
-rockBtn.addEventListener("click", () => {
-    playRound("rock");
-});
+function userPlay() {
+    rockBtn.addEventListener("click", () => {
+        playRound("rock");
+    });
+    
+    paperBtn.addEventListener("click", () => {
+        playRound("paper");
+    });
+    
+    scissorBtn.addEventListener("click", () => {
+        playRound("scissor");
+    });
+}
 
-paperBtn.addEventListener("click", () => {
-    playRound("paper");
-});
-
-scissorBtn.addEventListener("click", () => {
-    playRound("scissor");
-});
     
 
 function playRound(playerSelection) {
@@ -106,14 +109,18 @@ function checkWinner() {
     if (playerScoreNum === 5 || computerScoreNum === 5) {
         const winner = playerScoreNum === 5 ? "You win the game!" : "Computer wins!";
         alert(winner);
-        roundNum = drawCountNum = 0;
-        playerScoreNum = computerScoreNum = 0;
         updateScore();
+        /**if (playerScoreNum > 5 || computerScoreNum > 5) {
+            roundNum = drawCountNum = 0;
+            playerScoreNum = computerScoreNum = 0;
+            updateScore();
+        }**/
         // maybe add an alert to click reset and then "disable" the choices besides reset
     }
 }
 
 function game() {
+    userPlay();
     computerPlay();
     playRound();
     updateScore();
