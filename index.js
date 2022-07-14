@@ -3,35 +3,53 @@ const paperBtn = document.getElementById("paper");
 const scissorBtn = document.getElementById("scissor");
 const startBtn = document.getElementById("startGame");
 const resetBtn = document.getElementById("resetGame");
+const compImage = document.getElementById("compImage");
+const rock = "/images/gon-rock.jpeg";
+const paper = "/images/gon-paper.jpeg";
+const scissor = "/images/gon-scissor.jpg";
 let roundNum = 0;
 let playerScoreNum = 0;
 let computerScoreNum = 0;
 let drawCountNum = 0;
+const choices = ["rock", "paper", "scissor"];
 
 
 
 // Function for computer to play
 function computerPlay() {
-    const choices = ["rock", "paper", "scissor"];
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    if (computerChoice === "rock") {
+        compImage.setAttribute("src", rock);
+        compImage.style.visibility = "visible";
+    } else if (computerChoice === "paper") {
+        compImage.setAttribute("src", paper);
+        compImage.style.visibility = "visible";
+    } else if (computerChoice === "scissor") {
+        compImage.setAttribute("src", scissor);
+        compImage.style.visibility = "visible";
+    }
     return computerChoice;
 }
 
-function userPlay() {
-    rockBtn.addEventListener("click", () => {
-        playRound("rock");
-    });
-    
-    paperBtn.addEventListener("click", () => {
-        playRound("paper");
-    });
-    
-    scissorBtn.addEventListener("click", () => {
-        playRound("scissor");
-    });
+function handleRock() {
+    playRound("rock");
 }
 
+function handlePaper() {
+    playRound("paper");
+}
+
+function handleScissor() {
+    playRound("scissor");
+}
+
+function userPlay() {
+    rockBtn.addEventListener("click", handleRock);
     
+    paperBtn.addEventListener("click", handlePaper);
+    
+    scissorBtn.addEventListener("click", handleScissor);
+}
 
 function playRound(playerSelection) {
     const computerSelection = computerPlay();
@@ -106,16 +124,13 @@ function updateScore() {
 }
 
 function checkWinner() {
-    if (playerScoreNum === 5 || computerScoreNum === 5) {
+    if (playerScoreNum == 5 || computerScoreNum == 5) {
         const winner = playerScoreNum === 5 ? "You win the game!" : "Computer wins!";
         alert(winner);
+        rockBtn.removeEventListener("click", handleRock);
+        paperBtn.removeEventListener("click", handlePaper);
+        scissorBtn.removeEventListener("click", handleScissor);
         updateScore();
-        /**if (playerScoreNum > 5 || computerScoreNum > 5) {
-            roundNum = drawCountNum = 0;
-            playerScoreNum = computerScoreNum = 0;
-            updateScore();
-        }**/
-        // maybe add an alert to click reset and then "disable" the choices besides reset
     }
 }
 
@@ -129,6 +144,7 @@ function game() {
     
 startBtn.addEventListener("click", () => {
     game();
+    compImage.style.visibility = "hidden";
 }, {once: true});
 
 resetBtn.addEventListener("click", () => {
@@ -138,4 +154,6 @@ resetBtn.addEventListener("click", () => {
     drawCountNum = 0;
     updateScore();
     console.log("erased");
+    game();
+    compImage.style.visibility = "hidden";
 });
