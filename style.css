@@ -8,10 +8,6 @@
     src: url(fonts/MSMINCHO.TTF)
 }
 
-@font-face {
-    font-family: ArialBlack;
-    src: url(fonts/ariblk.ttf)
-}
 body {
     background-color: green;
     font-family: MsMincho;
@@ -46,6 +42,12 @@ h1 {
     gap: 20px;
 }
 
+.scoreRound, .scorePlayer, .scoreComputer, .scoreDraws {
+    border: 2px solid black;
+    padding: 4px;
+    color: lightgreen;
+}
+
 .selections {
     display: flex;
     flex-direction: row;
@@ -63,6 +65,7 @@ h1 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 2rem;
+    color: lightgreen
 }
 
 .choice {
@@ -91,6 +94,10 @@ h1 {
 
 img {
     border-radius: 50%;
+}
+
+#rock, #paper, #scissor {
+    cursor: pointer;
 }
 
 button {
