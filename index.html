@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock Paper Scissors Game</title>
+        <link rel ="stylesheet" href="style.css">
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <div class="flex-container">
+            <header class="header-box">
+                <div class="title">
+                    <h1>Rock Paper Scissors!</h1>
+                </div>
+            </header>
+            <div class="scoreboard">
+                <p class="scoreRound">Round: <span id="round">0</span></p>
+                <p class="scorePlayer">Player Score: <span id="playerScore">0</span></p>
+                <p class="scoreComputer">Computer Score: <span id="computerScore">0</span></p>
+                <p class="scoreDraws">Draws: <span id="draws">0</span></p>
+            </div>
+            <div class="result">
+                <p id="resultText">test</p>
+            </div>
+            <div class="selections">
+                <div class="selection0">
+                    <div class="header">Your Move</div>
+                    <div class="choice">
+                        <img src="/images/gon-rock.jpeg" alt="rock" id="rock" height=150px width=150px>
+                        <img src="/images/gon-paper.jpeg" alt="paper" id="paper" height=150px width=150px>
+                        <img src="/images/gon-scissor.jpg" alt="scissor" id="scissor" height=150px width=150px>
+                    </div>
+                </div>
+                <div class="selection1">
+                    <div class="header">Computer</div>
+                    <div class="compImage">
+                        <img src="/images/gon-scissor.jpg" alt="scissor" id="compImage" height=150px width=150px>
+                    </div>
+                </div>
+            </div>
+            <div class="gameOptions">
+                <button id="startGame">Start</button>
+                <button id="resetGame">Reset</button>
+            </div>
+        </div>
+    </body>
+</html>
