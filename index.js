@@ -4,6 +4,8 @@ const scissorBtn = document.getElementById("scissor");
 const startBtn = document.getElementById("startGame");
 const resetBtn = document.getElementById("resetGame");
 const compImage = document.getElementById("compImage");
+const result = document.querySelector(".result");
+const resultText = document.querySelector("#resultText")
 const rock = "/images/gon-rock.jpeg";
 const paper = "/images/gon-paper.jpeg";
 const scissor = "/images/gon-scissor.jpg";
@@ -53,25 +55,26 @@ function userPlay() {
 
 function playRound(playerSelection) {
     const computerSelection = computerPlay();
+    result.style.visibility = "visible";
     if(playerSelection === "rock") {
         if(computerSelection ==="rock") {
             drawCountNum ++;
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log("It's a Rock Draw!")
+            resultText.textContent = ("It's a Rock Draw!")
         } else if(computerSelection === "paper") {
             computerScoreNum ++;
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScoreNum);
+            resultText.textContent = (`You lost! ${computerSelection} beats ${playerSelection}`);
         } else if(computerSelection === "scissor") {
             playerScoreNum ++;
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScoreNum);
+            resultText.textContent = (`You won! ${playerSelection} beats ${computerSelection}`);
         }
     } else if (playerSelection === "paper"){
         if(computerSelection === "rock") {
@@ -79,19 +82,19 @@ function playRound(playerSelection) {
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScoreNum);
+            resultText.textContent = (`You won! ${playerSelection} beats ${computerSelection}`);
         } else if(computerSelection === "paper") {
             drawCountNum ++;
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log("Its a Paper Draw!");
+            resultText.textContent = ("Its a Paper Draw!");
         } else if(computerSelection === "scissor") {
             computerScoreNum ++;
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScoreNum);
+            resultText.textContent = (`You lost! ${computerSelection} beats ${playerSelection}`);
         }
     } else if (playerSelection === "scissor") {
         if(computerSelection === "rock") {
@@ -99,19 +102,19 @@ function playRound(playerSelection) {
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log(`${computerSelection} beats ${playerSelection}. \n Computer Score: ` + computerScoreNum);
+            resultText.textContent = (`You lost! ${computerSelection} beats ${playerSelection}`);
         } else if(computerSelection === "paper") {
             playerScoreNum ++;
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log(`${playerSelection} beats ${computerSelection}. \n Player Score: ` + playerScoreNum);
+            resultText.textContent = (`You won! ${playerSelection} beats ${computerSelection}`);
         } else if(computerSelection === "scissor") {
             drawCountNum ++;
             roundNum ++;
             updateScore();
             checkWinner();
-            console.log("It's a Scissor Draw!");
+            resultText.textContent = ("It's a Scissor Draw!");
         }
     }
 }
@@ -145,6 +148,7 @@ function game() {
 startBtn.addEventListener("click", () => {
     game();
     compImage.style.visibility = "hidden";
+    result.style.visibility = "hidden";
 }, {once: true});
 
 resetBtn.addEventListener("click", () => {
@@ -156,4 +160,5 @@ resetBtn.addEventListener("click", () => {
     console.log("erased");
     game();
     compImage.style.visibility = "hidden";
+    result.style.visibility = "hidden";
 });
