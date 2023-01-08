@@ -1,7 +1,7 @@
 const rockBtn = document.getElementById("rock");
 const paperBtn = document.getElementById("paper");
 const scissorBtn = document.getElementById("scissor");
-const startBtn = document.getElementById("startGame");
+//const startBtn = document.getElementById("startGame");
 const resetBtn = document.getElementById("resetGame");
 const compImage = document.getElementById("compImage");
 const result = document.querySelector(".result");
@@ -14,8 +14,6 @@ let playerScoreNum = 0;
 let computerScoreNum = 0;
 let drawCountNum = 0;
 const choices = ["rock", "paper", "scissor"];
-
-
 
 // Function for computer to play
 function computerPlay() {
@@ -144,12 +142,19 @@ function game() {
     updateScore();
     checkWinner();
 }
-    
-startBtn.addEventListener("click", () => {
+
+/*startBtn.addEventListener("click", () => {
     game();
     compImage.style.visibility = "hidden";
     result.style.visibility = "hidden";
 }, {once: true});
+*/
+
+window.onload = () => {
+    game();
+    compImage.style.visibility = "hidden";
+    result.style.visibility = "hidden";
+}
 
 resetBtn.addEventListener("click", () => {
     roundNum = 0;
